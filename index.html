@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>musicPlayer</title>
+  </head>
+  <body>
+    <h1>Centigrade</h1>
+    <form id="form">
+      <label> Age: <input type="text" id="age" /> </label>
+      <label> gender: <input type="text" id="gender" /> </label>
+      <button type="submit">Click</button>
+    </form>
+    <p></p>
+
+    <script>
+      const electron = require("electron");
+      const { ipcRenderer } = electron;
+
+      const p = document.querySelector("p");
+      const form = document.getElementById("form");
+
+      form.addEventListener("submit", submitForm);
+      function submitForm(e) {
+        e.preventDefault();
+        p.innerHTML = "";
+        const age = document.querySelector("#age").value;
+        const gender = document.querySelector("#gender").value;
+        console.log(age);
+        ipcRenderer.send("item:add", age, gender);
+      }
+
+      ipcRenderer.on("msg", function (e, data) {
+        const text = document.createTextNode(data);
+        p.appendChild(text);
+        console.log(data);
+      });
+    </script>
+  </body>
+</html>
