@@ -23,6 +23,13 @@
       </div>
     </nav>
 
+    <script>
+      const customTitlebar = require("custom-electron-titlebar");
+
+      new customTitlebar.Titlebar({
+        backgroundColor: customTitlebar.Color.fromHex("#444"),
+      });
+    </script>
     <script src="./static/scripts/app.js"></script>
   </body>
 </html>
